@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Deathblow
 {
-    public enum Charge { Any, Power, Mind, Life };
+    public enum Charge { Any_Energy, Power_Energy, Mind_Energy, Life_Energy };
     
     public interface ChargeOwner 
     {

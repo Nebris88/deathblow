@@ -25,9 +25,9 @@ namespace Deathblow
             Cards = new List<Card>();
             Dice = new List<Die>();
             Charges = new Dictionary<Charge, int>();
-            Charges.Add(Charge.Power, 0);
-            Charges.Add(Charge.Mind, 0);
-            Charges.Add(Charge.Life, 0);
+            Charges.Add(Charge.Power_Energy, 0);
+            Charges.Add(Charge.Mind_Energy, 0);
+            Charges.Add(Charge.Life_Energy, 0);
         }
 
         // Card Owner Method Impl

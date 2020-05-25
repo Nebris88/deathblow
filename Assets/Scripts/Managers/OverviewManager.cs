@@ -8,6 +8,7 @@ namespace Deathblow
 {
     public class OverviewManager : MonoBehaviour
     {
+        /*
         public GameObject PlayerInfoPrefab;
         public GameObject OverviewPanel;
 
@@ -79,5 +80,6 @@ namespace Deathblow
 
             PlayerPanels[player].text = overview;
         }
+        */
     }
 }

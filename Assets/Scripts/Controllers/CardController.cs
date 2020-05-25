@@ -7,9 +7,6 @@ namespace Deathblow
 {
     public class CardController : MonoBehaviour
     {
-        private Color equipmentColor = new Color(1f,1/5f,1/5f,1f);
-        private Color spellColor = new Color(1f,1f,1/5f,1f);
-
         public GameObject CardNameGameObject;
         public GameObject EquipToggleGameObject; 
         public GameObject DiscardButtonGameObject; 
@@ -67,8 +64,7 @@ namespace Deathblow
                     GameObject cardInfoObject = GameObject.Instantiate(CardInfoPrefab);
                     cardInfoObject.transform.SetParent(CardInfoPanel.transform);
                     cardInfoObject.name = card.Name;
-                    cardInfoObject.GetComponentInChildren<Text>().text = dieFace.ToString().Substring(0,1);
-                    cardInfoObject.GetComponent<Image>().color = equipmentColor;
+                    cardInfoObject.GetComponent<Image>().sprite = MasterManager.Instance.ResourceManager.GetSpriteByDieFace(dieFace);
                 });
             }
 
@@ -78,8 +74,7 @@ namespace Deathblow
                     GameObject cardInfoObject = GameObject.Instantiate(CardInfoPrefab);
                     cardInfoObject.transform.SetParent(CardInfoPanel.transform);
                     cardInfoObject.name = card.Name;
-                    cardInfoObject.GetComponentInChildren<Text>().text = charge.ToString().Substring(0,1);
-                    cardInfoObject.GetComponent<Image>().color = spellColor;
+                    cardInfoObject.GetComponent<Image>().sprite = MasterManager.Instance.ResourceManager.GetSpriteByCharge(charge);
                 });
             }
 

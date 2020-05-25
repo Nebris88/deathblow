@@ -11,8 +11,8 @@ namespace Deathblow
         public GameObject FreezeToggleGameObject;
         public GameObject LockToggleGameObject; 
         
+        public Image DieImage { get; set; }
         public Button RollButton { get; set; }
-        public Text Text { get; set; }
         public Toggle FreezeToggle { get; set; }
         public Toggle LockToggle { get; set; }
 
@@ -20,11 +20,6 @@ namespace Deathblow
 
         public void Init(Die die)
         {
-            if (TextGameObject == null)
-            {
-                Debug.LogError("Missing TextGameObject");
-                return;
-            }
             if (FreezeToggleGameObject == null)
             {
                 Debug.LogError("Missing FreezeToggleGameObject");
@@ -38,8 +33,8 @@ namespace Deathblow
 
             Die = die;
 
+            DieImage = gameObject.GetComponent<Image>();
             RollButton = gameObject.GetComponent<Button>();
-            Text = TextGameObject.GetComponent<Text>();
             FreezeToggle = FreezeToggleGameObject.GetComponent<Toggle>();
             LockToggle = LockToggleGameObject.GetComponent<Toggle>();
 
@@ -58,7 +53,7 @@ namespace Deathblow
 
         public void OnDiceChanged(Die die)
         {   
-            Text.text = die.DieFace.ToString();
+            DieImage.sprite = MasterManager.Instance.ResourceManager.GetSpriteByDieFace(die.DieFace);
             FreezeToggle.isOn = die.IsFrozen;
             LockToggle.isOn = die.IsLocked;
         }
