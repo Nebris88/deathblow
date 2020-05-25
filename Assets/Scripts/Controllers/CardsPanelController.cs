@@ -1,0 +1,89 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace Deathblow
+{
+    public class CardsPanelController : MonoBehaviour
+    {
+        public GameObject CardPrefab;
+        public GameObject EquipmentPanel;
+        public GameObject SpellPanel;
+        public GameObject HandPanel;
+
+        public Player Player {get; set; }
+        public Dictionary<Card, GameObject> Cards;
+        public void Init(Player player)
+        {
+            if (CardPrefab == null)
+            {
+                Debug.LogError("Missing CardPrefab");
+                return;
+            }
+            if (EquipmentPanel == null)
+            {
+                Debug.LogError("Missing EquipmentPanel");
+                return;
+            }
+            if (SpellPanel == null)
+            {
+                Debug.LogError("Missing SpellPanel");
+                return;
+            }
+            if (HandPanel == null)
+            {
+                Debug.LogError("Missing HandPanel");
+                return;
+            }
+
+            Cards = new Dictionary<Card, GameObject>();
+
+            Player = player;
+            player.RegisterOnCardAddedCallback(OnCardAdded);
+            player.RegisterOnCardRemovedCallback(OnCardRemoved);
+        }
+
+        public void OnCardAdded(Card card)
+        {
+            GameObject cardObject = GameObject.Instantiate(CardPrefab);
+            cardObject.transform.SetParent(HandPanel.transform);
+            cardObject.name = card.Name;
+
+            cardObject.GetComponent<CardController>().Init(card);
+
+            card.RegisterOnCardEquippedCallback(OnCardEquipped);
+            Cards.Add(card, cardObject);
+        }
+        
+        public void OnCardRemoved(Card card)
+        {
+            if (!Cards.ContainsKey(card))
+            {
+                Debug.LogError("Attempting to remove card from card panel lacking said card.");
+                return;
+            }
+            GameObject cardObject = Cards[card];
+            cardObject.GetComponent<CardController>().TearDown();
+            Cards.Remove(card);
+            GameObject.Destroy(cardObject);
+        }
+
+        public void OnCardEquipped(Card card)
+        {   
+            if (card.IsEquipped)
+            {
+                if (card.IsEquipment)
+                {
+                    Cards[card].transform.SetParent(EquipmentPanel.transform);
+                    return;
+                }
+                if (card.IsSpell)
+                {
+                    Cards[card].transform.SetParent(SpellPanel.transform);
+                    return;
+                }
+            }
+            Cards[card].transform.SetParent(HandPanel.transform);
+        }
+    }
+}
