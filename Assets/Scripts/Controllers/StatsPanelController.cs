@@ -19,7 +19,7 @@ namespace Deathblow
 
             Player = player;
 
-            foreach (DieFace dieFace in  Enum.GetValues(typeof(DieFace)))
+            foreach (DieFace dieFace in Dice.GetDieFaces(DieType.Standard))
             {
                 GameObject statPanelObject = GameObject.Instantiate(StatPanelPrefab);
                 statPanelObject.transform.SetParent(transform);

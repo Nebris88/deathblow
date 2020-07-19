@@ -10,17 +10,18 @@ namespace Deathblow
     {
         public GameObject ActionPanelPrefab;
         public GameObject ActionPanelContainer;
-        public GameObject ActionPanelSelector;
+        public Dropdown ActionPanelDropDown;
 
         public Dictionary<Player, GameObject> PlayerActionPanels { get; set; }
-        public Dropdown ActionPanelDropDown { get; set; }
 
-        public void Init(List<Player> players)
+        public void Init(GameManager gameManager)
         {
-            if ( Utils.isMissing("ActionManager", new Object[]{ ActionPanelPrefab, ActionPanelContainer, ActionPanelSelector }) ) return;
+            List<Player> players = gameManager.Players;
+            gameManager.RegisterOnActivePlayerChangedCallback(ToggleActiveActionPanel);
+
+            if ( Utils.isMissing("ActionManager", new Object[]{ ActionPanelPrefab, ActionPanelContainer, ActionPanelDropDown }) ) return;
 
             PlayerActionPanels = new Dictionary<Player, GameObject>();
-            ActionPanelDropDown = ActionPanelSelector.GetComponent<Dropdown>();
             List<string> options = new List<string>();
 
             players.ForEach(player => {
@@ -37,18 +38,10 @@ namespace Deathblow
                 PlayerActionPanels.Add(player, playerActionPanelObject);
             });
 
-            ToggleActiveActionPanel(players[0]);
-
             ActionPanelDropDown.ClearOptions();
             ActionPanelDropDown.AddOptions(options);
-            
-            ActionPanelDropDown.onValueChanged.AddListener(delegate { ActionPanelSelection(); });
-
-        }
-
-        public void ActionPanelSelection()
-        {
-            ToggleActiveActionPanel(PlayerActionPanels.Keys.ToList()[ActionPanelDropDown.value]);
+            ActionPanelDropDown.onValueChanged.AddListener(delegate { gameManager.ActivePlayer = PlayerActionPanels.Keys.ToList()[ActionPanelDropDown.value]; });
+            gameManager.ActivePlayer = PlayerActionPanels.Keys.ToList()[ActionPanelDropDown.value];
         }
 
         public void ToggleActiveActionPanel(Player player)

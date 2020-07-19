@@ -7,15 +7,12 @@ namespace Deathblow
 {
     public class Die
     {
-        private DieFace _DieFace;
-        private bool _IsFrozen;
-        private bool _IsLocked;
-
         public DieOwner DieOwner { get; set; }
         public DieType DieType { get; set; }
 
         Action<Die> OnDieChangedCallback;
 
+        private DieFace _DieFace;
         public DieFace DieFace 
         { 
             get => _DieFace; 
@@ -29,6 +26,8 @@ namespace Deathblow
                 }
             } 
         }
+
+        private bool _IsFrozen;
         public bool IsFrozen 
         { 
             get => _IsFrozen; 
@@ -42,6 +41,8 @@ namespace Deathblow
                 }
             } 
         }
+
+        private bool _IsLocked;
         public bool IsLocked
         { 
             get => _IsLocked; 

@@ -14,7 +14,7 @@ namespace Deathblow
         public Deck()
         {
             Cards = new List<Card>();
-            for (int x = 1; x < 51; x++)
+            for (int x = 1; x < 61; x++)
             {
                 Cards.Add(new Card(this, "" + x));
             }
@@ -29,6 +29,16 @@ namespace Deathblow
         public bool CardsInDiscard()
         {
             return discard.Count > 0;
+        }
+
+        public int GetCardsInDeck()
+        {
+            return deck.Count;
+        }
+
+        public int GetCardsInDiscard()
+        {
+            return discard.Count;
         }
 
         public bool CardsInDeckOrDiscard()

@@ -13,11 +13,11 @@ namespace Deathblow
         public List<Die> Dice { get; set; }
         public Dictionary<Charge, int> Charges { get; set; }
 
-        Action<Card> OnCardAddedCallback;
-        Action<Card> OnCardRemovedCallback;
-        Action<Die> OnDieAddedCallback;
-        Action<Die> OnDieRemovedCallback;
-        Action<Charge, ChargeOwner> OnChargeChangedCallback;
+        private Action<Card> OnCardAddedCallback;
+        private Action<Card> OnCardRemovedCallback;
+        private Action<Die> OnDieAddedCallback;
+        private Action<Die> OnDieRemovedCallback;
+        private Action<Charge, ChargeOwner> OnChargeChangedCallback;
 
         public Player(string name)
         {

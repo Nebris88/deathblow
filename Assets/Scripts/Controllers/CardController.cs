@@ -7,7 +7,7 @@ namespace Deathblow
 {
     public class CardController : MonoBehaviour
     {
-        public Button SelectButton;
+        public Button SelectButton; //TODO
         public Text CardName;
         public Toggle EquipToggle;
         public Button DiscardButton;
@@ -47,7 +47,6 @@ namespace Deathblow
                     cardIconObject.GetComponent<Image>().sprite = MasterManager.Instance.ResourceManager.GetSpriteByCharge(charge);
                 });
             }
-
 
             card.RegisterOnCardEquippedCallback(OnCardEquipped);
             OnCardEquipped(card);

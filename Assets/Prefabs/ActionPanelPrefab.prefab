@@ -1386,7 +1386,6 @@ GameObject:
   - component: {fileID: 3920219096688239899}
   - component: {fileID: 3920219096688239894}
   - component: {fileID: 3920219096688239895}
-  - component: {fileID: 3920219096688239892}
   - component: {fileID: 3920219096688239893}
   m_Layer: 5
   m_Name: ActionPanelPrefab
@@ -1454,18 +1453,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3920219096688239892
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3920219096688239898}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37dcf5889378d04468beaaa59b2b26a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3920219096688239893
 MonoBehaviour:
   m_ObjectHideFlags: 0
