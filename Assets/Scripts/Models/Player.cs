@@ -33,6 +33,7 @@ namespace Deathblow
         // Card Owner Method Impl
         public void AddCard(Card card)
         {
+            if (card == null) return;
             Cards.Add(card);
             card.CardOwner = this; 
             if (OnCardAddedCallback != null) 

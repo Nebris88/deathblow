@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Deathblow
 {
     public enum DieType { Standard, Monster }  
-    public enum DieFace { Attack, Defense, Health, Power, Mind, Life }
+    public enum DieFace { Attack, Defense, Heal, Power, Mind, Life }
 
     public static class Dice
     {
@@ -17,7 +17,7 @@ namespace Deathblow
             {
                 DiceSet = new Dictionary<DieType, DieFace[]>();
 
-                DieFace[] standardDieFaces = { DieFace.Attack, DieFace.Defense, DieFace.Health, DieFace.Power, DieFace.Mind, DieFace.Life };
+                DieFace[] standardDieFaces = { DieFace.Attack, DieFace.Defense, DieFace.Heal, DieFace.Power, DieFace.Mind, DieFace.Life };
                 DieFace[] monsterDieFaces = { DieFace.Attack, DieFace.Attack, DieFace.Attack, DieFace.Attack, DieFace.Attack, DieFace.Attack };
 
                 DiceSet.Add(DieType.Standard, standardDieFaces);

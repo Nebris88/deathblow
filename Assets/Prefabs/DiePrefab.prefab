@@ -821,3 +821,4 @@ MonoBehaviour:
   TextGameObject: {fileID: 0}
   FreezeToggleGameObject: {fileID: 2449199009927907722}
   LockToggleGameObject: {fileID: 3696840732512269907}
+  RemoveButtonGameObject: {fileID: 6076298476759572242}

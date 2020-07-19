@@ -38,7 +38,7 @@ namespace Deathblow
 
         public Card Draw()
         {
-            return Draw(1)[0];
+            return Draw(1).FirstOrDefault();
         }
 
         public List<Card> Draw(int number)

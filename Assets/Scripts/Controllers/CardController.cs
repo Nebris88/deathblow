@@ -7,74 +7,44 @@ namespace Deathblow
 {
     public class CardController : MonoBehaviour
     {
-        public GameObject CardNameGameObject;
-        public GameObject EquipToggleGameObject; 
-        public GameObject DiscardButtonGameObject; 
-        public GameObject CardInfoPanel; 
-        public GameObject CardInfoPrefab;
-
-        public Text CardName { get; set; }
-        public Toggle EquipToggle { get; set; }
-        public Button DiscardButton { get; set; }
+        public Button SelectButton;
+        public Text CardName;
+        public Toggle EquipToggle;
+        public Button DiscardButton;
+        public GameObject CardIconPanel; 
+        public GameObject CardIconPrefab;
 
         public Card Card { get; set; }
 
-        public void Init(Card card)
+        public void Init(Card card, bool selectable = false)
         {
-            if (CardNameGameObject == null)
-            {
-                Debug.LogError("Missing CardNameGameObject");
-                return;
-            }
-            if (EquipToggleGameObject == null)
-            {
-                Debug.LogError("Missing EquipToggleGameObject");
-                return;
-            }
-            if (DiscardButtonGameObject == null)
-            {
-                Debug.LogError("Missing DiscardButtonGameObject");
-                return;
-            }
-            if (CardInfoPanel == null)
-            {
-                Debug.LogError("Missing CardInfoPanel");
-                return;
-            }
-            if (CardInfoPrefab == null)
-            {
-                Debug.LogError("Missing CardInfoPrefab");
-                return;
-            }
+            if ( Utils.isMissing("CardController", new Object[]{ SelectButton, CardName, EquipToggle, DiscardButton, CardIconPanel, CardIconPrefab }) ) return;
 
             Card = card;
-
-            CardName = CardNameGameObject.GetComponent<Text>();
-            EquipToggle = EquipToggleGameObject.GetComponent<Toggle>();
-            DiscardButton = DiscardButtonGameObject.GetComponent<Button>();
-
+            
             CardName.text = card.Name;
             EquipToggle.onValueChanged.AddListener(delegate { card.IsEquipped = EquipToggle.isOn; });
             DiscardButton.onClick.AddListener(delegate { card.DiscardToDeck(); });
-            EquipToggleGameObject.SetActive(card.IsEquippable());
+            EquipToggle.gameObject.SetActive(card.IsEquippable() && !selectable);
+            SelectButton.interactable = false;
 
             if (card.IsEquipment)
             {   
                 card.Bonuses.ForEach(dieFace => {
-                    GameObject cardInfoObject = GameObject.Instantiate(CardInfoPrefab);
-                    cardInfoObject.transform.SetParent(CardInfoPanel.transform);
-                    cardInfoObject.name = card.Name;
-                    cardInfoObject.GetComponent<Image>().sprite = MasterManager.Instance.ResourceManager.GetSpriteByDieFace(dieFace);
+                    GameObject cardIconObject = GameObject.Instantiate(CardIconPrefab);
+                    cardIconObject.transform.SetParent(CardIconPanel.transform);
+                    cardIconObject.name = card.Name;
+                    cardIconObject.GetComponent<Image>().sprite = MasterManager.Instance.ResourceManager.GetSpriteByDieFace(dieFace);
                 });
             }
 
             if (card.IsSpell)
             {   
                 card.Costs.ForEach(charge => {
-                    GameObject cardInfoObject = GameObject.Instantiate(CardInfoPrefab);
-                    cardInfoObject.transform.SetParent(CardInfoPanel.transform);
-                    cardInfoObject.name = card.Name;
-                    cardInfoObject.GetComponent<Image>().sprite = MasterManager.Instance.ResourceManager.GetSpriteByCharge(charge);
+                    GameObject cardIconObject = GameObject.Instantiate(CardIconPrefab);
+                    cardIconObject.transform.SetParent(CardIconPanel.transform);
+                    cardIconObject.name = card.Name;
+                    cardIconObject.GetComponent<Image>().sprite = MasterManager.Instance.ResourceManager.GetSpriteByCharge(charge);
                 });
             }
 

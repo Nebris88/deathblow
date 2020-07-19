@@ -7,29 +7,21 @@ namespace Deathblow
 {
     public class DieController : MonoBehaviour
     {
-        public GameObject TextGameObject;
         public GameObject FreezeToggleGameObject;
         public GameObject LockToggleGameObject; 
+        public GameObject RemoveButtonGameObject; 
         
         public Image DieImage { get; set; }
         public Button RollButton { get; set; }
         public Toggle FreezeToggle { get; set; }
         public Toggle LockToggle { get; set; }
+        public Button RemoveButton { get; set; }
 
         public Die Die { get; set; }
 
         public void Init(Die die)
         {
-            if (FreezeToggleGameObject == null)
-            {
-                Debug.LogError("Missing FreezeToggleGameObject");
-                return;
-            }
-            if (LockToggleGameObject == null)
-            {
-                Debug.LogError("Missing LockToggleGameObject");
-                return;
-            }
+            if ( Utils.isMissing("DieController", new Object[]{ FreezeToggleGameObject, LockToggleGameObject, RemoveButtonGameObject }) ) return;
 
             Die = die;
 
@@ -37,10 +29,12 @@ namespace Deathblow
             RollButton = gameObject.GetComponent<Button>();
             FreezeToggle = FreezeToggleGameObject.GetComponent<Toggle>();
             LockToggle = LockToggleGameObject.GetComponent<Toggle>();
+            RemoveButton = RemoveButtonGameObject.GetComponent<Button>();
 
             RollButton.onClick.AddListener(delegate { die.Roll(); });
             FreezeToggle.onValueChanged.AddListener(delegate { die.IsFrozen = FreezeToggle.isOn; });
             LockToggle.onValueChanged.AddListener(delegate { die.IsLocked = LockToggle.isOn; });
+            RemoveButton.onClick.AddListener(delegate { Die.DieOwner.RemoveDie(Die); });
 
             die.RegisterOnDieChangedCallback(OnDiceChanged);
             OnDiceChanged(die);

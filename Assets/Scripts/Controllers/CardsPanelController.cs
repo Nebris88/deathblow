@@ -15,27 +15,8 @@ namespace Deathblow
         public Dictionary<Card, GameObject> Cards;
         public void Init(Player player)
         {
-            if (CardPrefab == null)
-            {
-                Debug.LogError("Missing CardPrefab");
-                return;
-            }
-            if (EquipmentPanel == null)
-            {
-                Debug.LogError("Missing EquipmentPanel");
-                return;
-            }
-            if (SpellPanel == null)
-            {
-                Debug.LogError("Missing SpellPanel");
-                return;
-            }
-            if (HandPanel == null)
-            {
-                Debug.LogError("Missing HandPanel");
-                return;
-            }
-
+            if ( Utils.isMissing("CardsPanelController", new Object[]{ CardPrefab, EquipmentPanel, SpellPanel, HandPanel }) ) return;
+            
             Cards = new Dictionary<Card, GameObject>();
 
             Player = player;

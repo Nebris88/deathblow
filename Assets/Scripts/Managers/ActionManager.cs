@@ -17,23 +17,7 @@ namespace Deathblow
 
         public void Init(List<Player> players)
         {
-            if (ActionPanelPrefab == null)
-            {
-                Debug.LogError("Missing ActionPanelPrefab");
-                return;
-            }
-
-            if (ActionPanelContainer == null)
-            {
-                Debug.LogError("Missing ActionPanelContainer");
-                return;
-            }
-
-            if (ActionPanelSelector == null)
-            {
-                Debug.LogError("Missing ActionPanelSelector");
-                return;
-            }
+            if ( Utils.isMissing("ActionManager", new Object[]{ ActionPanelPrefab, ActionPanelContainer, ActionPanelSelector }) ) return;
 
             PlayerActionPanels = new Dictionary<Player, GameObject>();
             ActionPanelDropDown = ActionPanelSelector.GetComponent<Dropdown>();
@@ -42,14 +26,15 @@ namespace Deathblow
             players.ForEach(player => {
                 options.Add(player.Name);
 
-                GameObject playerObject = GameObject.Instantiate(ActionPanelPrefab);
-                playerObject.transform.SetParent(ActionPanelContainer.transform);
-                playerObject.name = player.Name + " Action Panel";
+                GameObject playerActionPanelObject = GameObject.Instantiate(ActionPanelPrefab);
+                playerActionPanelObject.transform.SetParent(ActionPanelContainer.transform);
+                playerActionPanelObject.name = player.Name + " Action Panel";
                 
-                playerObject.GetComponentInChildren<DicePanelController>().Init(player);
-                playerObject.GetComponentInChildren<CardsPanelController>().Init(player);
+                playerActionPanelObject.GetComponentInChildren<DicePanelController>().Init(player);
+                playerActionPanelObject.GetComponentInChildren<CardsPanelController>().Init(player);
+                playerActionPanelObject.GetComponentInChildren<StatsPanelController>().Init(player);
 
-                PlayerActionPanels.Add(player, playerObject);
+                PlayerActionPanels.Add(player, playerActionPanelObject);
             });
 
             ToggleActiveActionPanel(players[0]);

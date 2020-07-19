@@ -43,7 +43,7 @@ namespace Deathblow
             } 
         }
         public bool IsLocked
-         { 
+        { 
             get => _IsLocked; 
             set 
             {
@@ -68,10 +68,6 @@ namespace Deathblow
         public void Roll()
         {
             DieFace = Dice.Roll(DieType);
-            if (OnDieChangedCallback != null)
-            {
-                OnDieChangedCallback(this);
-            }
         }
 
         public void RegisterOnDieChangedCallback(Action<Die> callback)

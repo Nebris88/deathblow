@@ -21,37 +21,15 @@ namespace Deathblow
             }
 
             ResourceManager = gameObject.GetComponent<ResourceManager>();
-            if (ResourceManager == null) 
-            {
-                Debug.LogError("Missing ResourceManager");
-                return;
-            }
-            ResourceManager.Init();
-
             GameManager = gameObject.GetComponent<GameManager>();
-            if (GameManager == null) 
-            {
-                Debug.LogError("Missing GameManager");
-                return;
-            }
-            GameManager.Init();
-
-            /*
-            OverviewManager = gameObject.GetComponent<OverviewManager>();
-            if (OverviewManager == null) 
-            {   
-                Debug.LogError("Missing OverviewManager");
-                return;
-            }
-            OverviewManager.Init(GameManager.Players);
-            */
-            
+            //OverviewManager = gameObject.GetComponent<OverviewManager>();
             ActionManager = gameObject.GetComponent<ActionManager>();
-            if (ActionManager == null) 
-            {   
-                Debug.LogError("Missing ActionManager");
-                return;
-            }
+
+            if ( Utils.isMissing("MasterManager", new Object[]{ ResourceManager, GameManager, ActionManager }) ) return;
+
+            ResourceManager.Init();
+            GameManager.Init();
+            // OverviewManager.Init(GameManager.Players);
             ActionManager.Init(GameManager.Players);
         }
 

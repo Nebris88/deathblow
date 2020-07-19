@@ -1,18 +1,31 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class StatsPanelController : MonoBehaviour
+namespace Deathblow
 {
-    // Start is called before the first frame update
-    void Start()
+    public class StatsPanelController : MonoBehaviour
     {
-        
-    }
+        public GameObject StatPanelPrefab;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public Player Player {get; set; }
+
+        public void Init(Player player)
+        {
+            if ( Utils.isMissing("StatsPanelController", new UnityEngine.Object[]{ StatPanelPrefab }) ) return;
+
+            Player = player;
+
+            foreach (DieFace dieFace in  Enum.GetValues(typeof(DieFace)))
+            {
+                GameObject statPanelObject = GameObject.Instantiate(StatPanelPrefab);
+                statPanelObject.transform.SetParent(transform);
+                statPanelObject.name = player.Name + " " + dieFace + " Stat Panel";
+                statPanelObject.GetComponentInChildren<StatPanelController>().Init(player, dieFace);
+            }
+        }
     }
 }

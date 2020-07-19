@@ -9,51 +9,17 @@ namespace Deathblow
     {
         public GameObject DiePrefab;
         public GameObject DiceContainer;
-        public GameObject RollDiceGameObject;
-        public GameObject UnfreezeDiceGameObject;
-        public GameObject UnlockDiceGameObject;
-        public GameObject AddDieGameObject;
+        public Button RollDiceButton;
+        public Button UnfreezeDiceButton;
+        public Button UnlockDiceButton;
+        public Button AddDieButton;
 
         public Player Player {get; set; }
         public Dictionary<Die, GameObject> Dice;
 
         public void Init(Player player)
         {
-            if (DiePrefab == null)
-            {
-                Debug.LogError("Missing DiePrefab");
-                return;
-            }
-
-            if (DiceContainer == null)
-            {
-                Debug.LogError("Missing DiceContainer");
-                return;
-            }
-
-            if (RollDiceGameObject == null)
-            {
-                Debug.LogError("Missing RollDiceGameObject");
-                return;
-            }
-
-            if (UnfreezeDiceGameObject == null)
-            {
-                Debug.LogError("Missing UnfreezeDiceGameObject");
-                return;
-            }
-
-            if (UnlockDiceGameObject == null)
-            {
-                Debug.LogError("Missing UnlockDiceGameObject");
-                return;
-            }
-
-            if (AddDieGameObject == null)
-            {
-                Debug.LogError("Missing AddDieGameObject");
-                return;
-            }
+            if ( Utils.isMissing("DicePanelController", new Object[]{ DiePrefab, DiceContainer, RollDiceButton, UnfreezeDiceButton, UnlockDiceButton, AddDieButton }) ) return;
 
             Dice = new Dictionary<Die, GameObject>();
 
@@ -61,10 +27,10 @@ namespace Deathblow
             player.RegisterOnDieAddedCallback(OnDieAdded);
             player.RegisterOnDieRemovedCallback(OnDieRemoved);
 
-            RollDiceGameObject.GetComponent<Button>().onClick.AddListener(delegate {  player.RollDice(); });
-            UnfreezeDiceGameObject.GetComponent<Button>().onClick.AddListener(delegate { player.UnfreezeDice(); });
-            UnlockDiceGameObject.GetComponent<Button>().onClick.AddListener(delegate { player.UnlockDice(); });
-            AddDieGameObject.GetComponent<Button>().onClick.AddListener(delegate { player.AddDie(new Die(player, DieType.Standard)); });
+            RollDiceButton.onClick.AddListener(delegate {  player.RollDice(); });
+            UnfreezeDiceButton.onClick.AddListener(delegate { player.UnfreezeDice(); });
+            UnlockDiceButton.onClick.AddListener(delegate { player.UnlockDice(); });
+            AddDieButton.onClick.AddListener(delegate { player.AddDie(new Die(player, DieType.Standard)); });
         }
 
         public void OnDieAdded(Die die)
