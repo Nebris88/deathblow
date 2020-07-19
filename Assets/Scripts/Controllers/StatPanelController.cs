@@ -31,22 +31,37 @@ namespace Deathblow
             DieFace = dieFace;
 
             if (dieFace == DieFace.Attack) baseStat = 1;
-            
             LabelText.text = dieFace + " ";
 
-            IncreaseButton.onClick.AddListener(delegate { IncreaseBaseState(true); });
-            DecreaseButton.onClick.AddListener(delegate { IncreaseBaseState(false); });
+            IncreaseButton.onClick.AddListener(delegate { IncreaseBaseStat(true); });
+            DecreaseButton.onClick.AddListener(delegate { IncreaseBaseStat(false); });
 
             player.RegisterOnCardAddedCallback(OnCardAdded);
             player.RegisterOnCardRemovedCallback(OnCardRemoved);
             player.RegisterOnDieAddedCallback(OnDieAdded);
             player.RegisterOnDieRemovedCallback(OnDieRemoved);
+            player.RegisterOnChargeChangedCallback(OnChargeChanged);
+        }
+
+        private int GetBaseStat()
+        {
+            switch (DieFace)
+            {
+                case DieFace.Power:
+                    return Player.GetCharges(Charge.Power_Energy);
+                case DieFace.Mind:
+                    return Player.GetCharges(Charge.Mind_Energy);
+                case DieFace.Life:
+                    return Player.GetCharges(Charge.Life_Energy);
+                default:
+                    return baseStat;
+            }
         }
 
         public void OnStatChange()
         {
             //Base
-            BaseText.text = baseStat.ToString();
+            BaseText.text = GetBaseStat().ToString();
 
             //Dice
             int diceFaces = 0;
@@ -72,9 +87,29 @@ namespace Deathblow
         }
 
         //BASE
-        public void IncreaseBaseState(bool increase)
+        public void IncreaseBaseStat(bool increase)
         {
-            baseStat += increase ? 1 : -1;
+            switch (DieFace)
+            {
+                case DieFace.Power:
+                    if (increase) Player.AddCharge(Charge.Power_Energy);
+                    else Player.RemoveCharge(Charge.Power_Energy);
+                    //increase ? Player.AddCharge(Charge.Power_Energy) : Player.RemoveCharge(Charge.Power_Energy);
+                    break;
+                case DieFace.Mind:
+                    if (increase) Player.AddCharge(Charge.Mind_Energy);
+                    else Player.RemoveCharge(Charge.Mind_Energy);
+                    //increase ? Player.AddCharge(Charge.Mind_Energy) : Player.RemoveCharge(Charge.Mind_Energy);
+                    break;
+                case DieFace.Life:
+                    if (increase) Player.AddCharge(Charge.Life_Energy);
+                    else Player.RemoveCharge(Charge.Life_Energy);
+                    //increase ? Player.AddCharge(Charge.Life_Energy) : Player.RemoveCharge(Charge.Life_Energy);
+                    break;
+                default:
+                    baseStat += increase ? 1 : -1;
+                    break;
+            }
             OnStatChange();
         }
 
@@ -106,6 +141,12 @@ namespace Deathblow
         }
 
         public void OnDieChanged(Die die)
+        {
+            OnStatChange();
+        }
+
+        //Charge
+        public void OnChargeChanged(Charge charge, ChargeOwner owner)
         {
             OnStatChange();
         }
