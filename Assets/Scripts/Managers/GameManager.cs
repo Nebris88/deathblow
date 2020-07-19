@@ -7,13 +7,11 @@ namespace Deathblow
 {
     public class GameManager : MonoBehaviour
     {
-        //Initial Conditions
-        public int playerCount = 4;
-        public int startingDice = 5;
-        public int startingCards = 5;
-
         public Deck Deck { get; set; }
         public List<Player> Players { get; set; }
+        public List<Monster> Monsters { get; set; }
+
+        private GameRulesManager gameRulesManager;
 
         private Player _ActivePlayer;
         public Player ActivePlayer
@@ -30,21 +28,44 @@ namespace Deathblow
             } 
         }
 
-        private Action<Player> OnActivePlayerChangedCallback;
-
-        public void Init()
+        private Monster _ActiveMonster;
+        public Monster ActiveMonster
         {
+            get => _ActiveMonster; 
+            set 
+            {
+                bool change = (_ActiveMonster != value);
+                _ActiveMonster = value;
+                if (change && OnActiveMonsterChangedCallback != null)
+                {
+                    OnActiveMonsterChangedCallback(ActiveMonster);
+                }
+            } 
+        }
+
+        private Action<Player> OnActivePlayerChangedCallback;
+        private Action<Monster> OnActiveMonsterChangedCallback;
+
+        public void Init(GameRulesManager gameRulesManager)
+        {
+            this.gameRulesManager = gameRulesManager;
+
             //Load Decks
             Deck = new Deck();
             //Deck.PrintDeck();
 
             //Create Players
             Players = new List<Player>();
-            for (int x = 1; x < playerCount + 1; x++)
+            for (int x = 1; x < gameRulesManager.playerCount + 1; x++)
             {
-                string playerName = "Player " + x;
-                Player player = new Player(playerName);
-                Players.Add(player);
+                Players.Add(new Player("Player " + x));
+            }
+
+            //Create Monsters
+            Monsters = new List<Monster>();
+            for (int x = 1; x < 5 + 1; x++)
+            {
+                Monsters.Add(new Monster("Monster " + x));
             }
         }
 
@@ -64,18 +85,31 @@ namespace Deathblow
                 player.ClearCharges();
             });
 
+            Monsters.ForEach(monster => {
+                monster.RemoveDice();
+                monster.ClearCharges();
+            });
+
             Deck.ReturnAndShuffle();
 
             // Give Initial Dice to Players
             Players.ForEach(player => {
-                for (int y = 1; y < startingDice + 1; y++)
+                for (int y = 1; y < gameRulesManager.startingDice + 1; y++)
                 {
                     player.AddDie(new Die(player, DieType.Standard));
                 }
             });
 
+            // Give Initial Dice to Monsters
+            Monsters.ForEach(monster => {
+                for (int y = 1; y < 11 + 1; y++)
+                {
+                    monster.AddDie(new Die(monster, DieType.Monster));
+                }
+            });
+
             // Give Initial Cards to Players
-            Deck.Deal(PlayersAsCardOwners(), startingCards);
+            Deck.Deal(PlayersAsCardOwners(), gameRulesManager.startingCards);
         }
 
         public void TEST()
@@ -97,6 +131,16 @@ namespace Deathblow
         public void UnregisterOnActivePlayerChangedCallback(Action<Player> callback)
         {
             OnActivePlayerChangedCallback -= callback;
+        }
+
+        public void RegisterOnActiveMonsterChangedCallback(Action<Monster> callback)
+        {
+            OnActiveMonsterChangedCallback += callback;
+        }
+
+        public void UnregisterOnActiveMonsterChangedCallback(Action<Monster> callback)
+        {
+            OnActiveMonsterChangedCallback -= callback;
         }
     }
 }

@@ -28,8 +28,6 @@ namespace Deathblow
 
         public void RemoveDie(Die die)
         {
-            Debug.Log("Taco");
-
             if (!Dice.Contains(die))
             {
                 Debug.LogError("Attempting to remove die from player lacking said die.");

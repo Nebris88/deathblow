@@ -9,8 +9,6 @@ namespace Deathblow
 {
     public class StatPanelController : MonoBehaviour
     {
-        public float match = 2f;
-
         public Text LabelText;
         public Button IncreaseButton;
         public Button DecreaseButton;
@@ -83,7 +81,7 @@ namespace Deathblow
             CardsText.text = cardFaces.ToString();
 
             //Total
-            TotalText.text = (baseStat + Math.Floor( (diceFaces + cardFaces) / match )).ToString();
+            TotalText.text = (baseStat + Math.Floor( (diceFaces + cardFaces) / MasterManager.Instance.GameRulesManager.match )).ToString();
         }
 
         //BASE
