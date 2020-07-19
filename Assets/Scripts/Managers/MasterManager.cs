@@ -28,18 +28,19 @@ namespace Deathblow
             GameRulesManager = gameObject.GetComponent<GameRulesManager>();
             GameManager = gameObject.GetComponent<GameManager>();
             MenuManager = gameObject.GetComponent<MenuManager>();
-            //OverviewManager = gameObject.GetComponent<OverviewManager>();
+            OverviewManager = gameObject.GetComponent<OverviewManager>();
             ActionManager = gameObject.GetComponent<ActionManager>();
             MonsterManager = gameObject.GetComponent<MonsterManager>();
             DeckManager = gameObject.GetComponent<DeckManager>();
 
-            if ( Utils.isMissing("MasterManager", new Object[]{ ResourceManager, GameRulesManager, GameManager, MenuManager, ActionManager, MonsterManager, DeckManager }) ) return;
+            if ( Utils.isMissing("MasterManager", new Object[]{ ResourceManager, GameRulesManager, GameManager, MenuManager, OverviewManager, ActionManager, 
+                MonsterManager, DeckManager }) ) return;
 
             ResourceManager.Init();
             GameRulesManager.Init();
             GameManager.Init(GameRulesManager);
             MenuManager.Init(GameManager);
-            //OverviewManager.Init(GameManager.Players);
+            OverviewManager.Init(GameManager);
             ActionManager.Init(GameManager);
             MonsterManager.Init(GameManager);
             DeckManager.Init(GameManager);

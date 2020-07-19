@@ -8,78 +8,53 @@ namespace Deathblow
 {
     public class OverviewManager : MonoBehaviour
     {
-        /*
-        public GameObject PlayerInfoPrefab;
-        public GameObject OverviewPanel;
+        public GameObject OverviewPrefab;
+        public GameObject OverviewPanelContainer;
 
-        public Dictionary<Player, Text> PlayerPanels { get; set; }
+        public Dictionary<Player, OverviewController> PlayerPanels { get; set; }
+        public Dictionary<Monster, OverviewController> MonsterPanels { get; set; }
 
-        public void Init(List<Player> players)
+        public void Init(GameManager gameManager)
         {
-            if (PlayerInfoPrefab == null)
-            {
-                Debug.LogError("Missing PlayerInfoPrefab");
-                return;
-            }
+            if ( Utils.isMissing("CardController", new Object[]{ OverviewPrefab, OverviewPanelContainer }) ) return;
 
-            if (OverviewPanel == null)
-            {
-                Debug.LogError("Missing OverviewPanel");
-                return;
-            }
+            MonsterPanels = new Dictionary<Monster, OverviewController>();
+            gameManager.Monsters.ForEach(monster => {
+                MonsterPanels.Add(monster, CreateOverviewPanel(monster));
+            });
 
-            PlayerPanels = new Dictionary<Player, Text>();
+            PlayerPanels = new Dictionary<Player, OverviewController>();
+            gameManager.Players.ForEach(player => {
+                PlayerPanels.Add(player, CreateOverviewPanel(player));
+            });
 
-            players.ForEach(player => {
-                GameObject playerObject = GameObject.Instantiate(PlayerInfoPrefab);
-                playerObject.transform.SetParent(OverviewPanel.transform);
-                //player.RegisterOnHandChangedCallback(OnHandChanged);
-                //player.RegisterOnChargeChangedCallback(OnChargeChanged);
-                PlayerPanels.Add(player, playerObject.GetComponent<Text>());
+            gameManager.RegisterOnActiveMonsterChangedCallback(OnActiveMonsterChanged);
+            gameManager.RegisterOnActivePlayerChangedCallback(OnActivePlayerChanged);
+        }
+
+        private OverviewController CreateOverviewPanel(Entity entity)
+        {
+            GameObject overviewPanelObject = GameObject.Instantiate(OverviewPrefab);
+            overviewPanelObject.transform.SetParent(OverviewPanelContainer.transform);
+            overviewPanelObject.name = entity.Name;
+            OverviewController overviewController = overviewPanelObject.GetComponent<OverviewController>();
+            overviewController.Init(entity);
+
+            return overviewController;
+        }
+
+        public void OnActiveMonsterChanged(Monster monster)
+        {
+            MonsterPanels.Keys.ToList().ForEach(key => {
+                MonsterPanels[key].gameObject.SetActive(key == monster);
             });
         }
 
-        void Update()
+        public void OnActivePlayerChanged(Player player)
         {
-            //FIXME
-            PlayerPanels.Keys.ToList().ForEach(player => {
-                ChangeOverview(player);
+            PlayerPanels.Keys.ToList().ForEach(key => {
+                PlayerPanels[key].SetActiveIdentifier(key == player);
             });
         }
-
-        public void OnHandChanged(Card card)
-        {
-            ChangeOverview((Player)card.CardOwner);
-        }
-
-        public void OnChargeChanged(Charge charge, ChargeOwner chargeOwner)
-        {
-            ChangeOverview((Player)chargeOwner);
-        }
-
-        private void ChangeOverview(Player player)
-        {
-            string overview = player.Name + " - ";
-
-            player.Dice.ForEach(die => {
-                overview += die.DieFace.ToString().Substring(0,1) + " ";   
-            });
-            overview += "- ";
-
-            player.Cards.ForEach(card => {
-                overview += card.Name + " ";   
-            });
-            overview += "- ";
-
-            player.Charges.Keys.ToList().ForEach(charge => {
-                for(int x = 0; x < player.Charges[charge]; x++)
-                {
-                    overview += charge.ToString().Substring(0,1) + " ";
-                }
-            });
-
-            PlayerPanels[player].text = overview;
-        }
-        */
     }
 }
