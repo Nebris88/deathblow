@@ -31,7 +31,24 @@ namespace Deathblow
                 }
             } 
         }
-        
+
+        /*
+        private CardOwner _CardOwner;
+        public CardOwner CardOwner
+        {
+            get => _CardOwner; 
+            set 
+            {
+                bool change = (_CardOwner != value);
+                if (change && _CardOwner != null)
+                {
+                    _CardOwner.RemoveCard(this);
+                }
+                _CardOwner = value;
+            } 
+        }
+        */
+
         Action<Card> OnCardEquippedCallback;
 
         public Card (Deck deck, string name)

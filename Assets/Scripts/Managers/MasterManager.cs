@@ -16,6 +16,7 @@ namespace Deathblow
         public ActionManager ActionManager { get; set; }
         public MonsterManager MonsterManager { get; set; }
         public DeckManager DeckManager { get; set; }
+        public PrizeManager PrizeManager { get; set; }
 
         void Awake()
         {
@@ -32,9 +33,10 @@ namespace Deathblow
             ActionManager = gameObject.GetComponent<ActionManager>();
             MonsterManager = gameObject.GetComponent<MonsterManager>();
             DeckManager = gameObject.GetComponent<DeckManager>();
+            PrizeManager = gameObject.GetComponent<PrizeManager>();
 
             if ( Utils.isMissing("MasterManager", new Object[]{ ResourceManager, GameRulesManager, GameManager, MenuManager, OverviewManager, ActionManager, 
-                MonsterManager, DeckManager }) ) return;
+                MonsterManager, DeckManager, PrizeManager }) ) return;
 
             ResourceManager.Init();
             GameRulesManager.Init();
@@ -44,6 +46,7 @@ namespace Deathblow
             ActionManager.Init(GameManager);
             MonsterManager.Init(GameManager);
             DeckManager.Init(GameManager);
+            PrizeManager.Init(GameManager);
         }
 
         void Start()

@@ -12,6 +12,7 @@ namespace Deathblow
         public int startingDice = 5;
         public int startingCards = 5;
         public float match = 3f;
+        public int prizes = 7;
 
         public void Init()
         {

@@ -10,6 +10,7 @@ namespace Deathblow
         public Deck Deck { get; set; }
         public List<Player> Players { get; set; }
         public List<Monster> Monsters { get; set; }
+        public PrizePool PrizePool { get; set; }
 
         private GameRulesManager gameRulesManager;
 
@@ -67,6 +68,8 @@ namespace Deathblow
             {
                 Monsters.Add(new Monster("Monster " + x));
             }
+
+            PrizePool = new PrizePool();
         }
 
         private List<CardOwner> PlayersAsCardOwners()
@@ -110,6 +113,20 @@ namespace Deathblow
 
             // Give Initial Cards to Players
             Deck.Deal(PlayersAsCardOwners(), gameRulesManager.startingCards);
+        }
+
+        public void FillPrizePool()
+        {
+            Deck.Draw(gameRulesManager.prizes).ForEach(card => {
+                PrizePool.AddCard(card);
+            });
+        }
+
+        public void EmptyPrizePool()
+        {
+            new List<Card>(PrizePool.Cards).ForEach(card => {
+                card.DiscardToDeck();
+            });
         }
 
         public void TEST()

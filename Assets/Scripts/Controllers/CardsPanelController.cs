@@ -13,6 +13,7 @@ namespace Deathblow
 
         public Player Player {get; set; }
         public Dictionary<Card, GameObject> Cards;
+        
         public void Init(Player player)
         {
             if ( Utils.isMissing("CardsPanelController", new Object[]{ CardPrefab, EquipmentPanel, SpellPanel, HandPanel }) ) return;

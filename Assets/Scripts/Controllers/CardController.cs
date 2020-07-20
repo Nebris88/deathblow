@@ -7,7 +7,7 @@ namespace Deathblow
 {
     public class CardController : MonoBehaviour
     {
-        public Button SelectButton; //TODO
+        public Button SelectButton;
         public Text CardName;
         public Toggle EquipToggle;
         public Button DiscardButton;
@@ -26,7 +26,9 @@ namespace Deathblow
             EquipToggle.onValueChanged.AddListener(delegate { card.IsEquipped = EquipToggle.isOn; });
             DiscardButton.onClick.AddListener(delegate { card.DiscardToDeck(); });
             EquipToggle.gameObject.SetActive(card.IsEquippable() && !selectable);
-            SelectButton.interactable = false;
+
+            SelectButton.interactable = selectable;
+            SelectButton.onClick.AddListener(delegate { OnCardSelected(); });
 
             if (card.IsEquipment)
             {   
@@ -60,6 +62,12 @@ namespace Deathblow
         public void OnCardEquipped(Card card)
         {   
             EquipToggle.isOn = card.IsEquipped;
+        }
+
+        public void OnCardSelected()
+        {
+            MasterManager.Instance.GameManager.PrizePool.RemoveCard(Card);
+            MasterManager.Instance.GameManager.ActivePlayer.AddCard(Card);
         }
     }
 }
