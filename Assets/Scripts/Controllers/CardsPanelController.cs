@@ -46,12 +46,18 @@ namespace Deathblow
             }
             GameObject cardObject = Cards[card];
             cardObject.GetComponent<CardController>().TearDown();
+            card.UnregisterOnCardEquippedCallback(OnCardEquipped);
             Cards.Remove(card);
             GameObject.Destroy(cardObject);
         }
 
         public void OnCardEquipped(Card card)
         {   
+            if (!Cards.ContainsKey(card))
+            {
+                Debug.LogError("Didn't unregister card equipped callback!");
+                return;
+            }
             if (card.IsEquipped)
             {
                 if (card.IsEquipment())
