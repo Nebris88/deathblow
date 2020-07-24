@@ -32,11 +32,11 @@ namespace Deathblow
 
             if (card.IsEquipment)
             {   
-                card.Bonuses.ForEach(dieFace => {
+                card.Bonuses.ForEach(bonus => {
                     GameObject cardIconObject = GameObject.Instantiate(CardIconPrefab);
                     cardIconObject.transform.SetParent(CardIconPanel.transform);
                     cardIconObject.name = card.Name;
-                    cardIconObject.GetComponent<Image>().sprite = MasterManager.Instance.ResourceManager.GetSpriteByDieFace(dieFace);
+                    cardIconObject.GetComponent<Image>().sprite = MasterManager.Instance.ResourceManager.GetSpriteByCardBonus(bonus);
                 });
             }
 

@@ -39,6 +39,7 @@ namespace Deathblow
 
         public static DieFace[] GetDieFaces(DieType dieType)
         {
+            InitDice();
             return DiceSet[dieType];
         }
     }

@@ -24,6 +24,17 @@ namespace Deathblow
             });
         }
 
+        public Sprite GetSpriteByCardBonus(CardBonus cardBonus)
+        {
+            if (!IconSprites.ContainsKey(cardBonus.ToString()))
+            {
+                Debug.LogError("Missing a sprite? " + cardBonus.ToString());
+                return null;
+            }
+
+            return IconSprites[cardBonus.ToString()];
+        }
+
         public Sprite GetSpriteByDieFace(DieFace dieface)
         {
             if (!IconSprites.ContainsKey(dieface.ToString()))

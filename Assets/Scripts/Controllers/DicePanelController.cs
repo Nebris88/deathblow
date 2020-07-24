@@ -81,7 +81,7 @@ namespace Deathblow
                         if (card.IsEquipped)
                         {
                             card.Bonuses.ForEach(bonus => {
-                                if (bonus == dieFace) cardFaces++;
+                                if (bonus.ToString() == dieFace.ToString()) cardFaces++;
                             });
                         }
                     });

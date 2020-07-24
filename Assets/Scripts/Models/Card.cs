@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Deathblow
 {
+    public enum CardBonus { Die, Attack, Defense, Heal, Power, Mind, Life }  
+
     public class Card
     {
         private bool _IsEquipped;
@@ -12,7 +15,7 @@ namespace Deathblow
         public CardOwner CardOwner { get; set; }
         public Deck Deck { get; set; }
         public string Name { get; set; }
-        public List<DieFace> Bonuses { get; set; }
+        public List<CardBonus> Bonuses { get; set; }
         public List<Charge> Costs { get; set; }
         
         public bool IsEquipment { get; set; }
@@ -57,10 +60,11 @@ namespace Deathblow
             Name = name;
             IsEquipment = false;
             IsSpell = false;
-            Bonuses = new List<DieFace>();
+            Bonuses = new List<CardBonus>();
             Costs = new List<Charge>();
 
             RandomizeCard();
+            RegisterOnCardEquippedCallback(OnThisEquipped);
         }
 
         public void DiscardToDeck()
@@ -93,6 +97,28 @@ namespace Deathblow
             return IsEquipment || IsSpell;
         }
 
+        public void OnThisEquipped(Card card)
+        {
+            if (card.CardOwner != null && card.CardOwner is DieOwner)
+            {
+                DieOwner dieOwner = (DieOwner) card.CardOwner;
+                Bonuses.Where(bonus => bonus == CardBonus.Die).ToList().ForEach(bonus => {
+                    if (IsEquipped)
+                    {
+                        dieOwner.AddDie(new Die(dieOwner, DieType.Standard));
+                    }
+                    else
+                    {
+                        List<Die> dice = dieOwner.Dice;
+                        if (dice.Count > 0)
+                        {
+                            dieOwner.RemoveDie(dice[0]);
+                        }
+                    }
+                });
+            }
+        }
+
         public void RandomizeCard()
         {
             int type = (int)UnityEngine.Random.Range(0, 3);
@@ -102,7 +128,7 @@ namespace Deathblow
                 IsEquipment = true;
                 for (int x = 0; x < (int)UnityEngine.Random.Range(1, 4); x++)
                 {
-                    Bonuses.Add(Dice.Roll(DieType.Standard));
+                    Bonuses.Add((CardBonus)(int)UnityEngine.Random.Range(0, 7));
                 }
                 return;
             }
