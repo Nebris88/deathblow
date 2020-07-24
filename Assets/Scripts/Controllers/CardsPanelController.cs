@@ -54,12 +54,12 @@ namespace Deathblow
         {   
             if (card.IsEquipped)
             {
-                if (card.IsEquipment)
+                if (card.IsEquipment())
                 {
                     Cards[card].transform.SetParent(EquipmentPanel.transform);
                     return;
                 }
-                if (card.IsSpell)
+                if (card.IsSpell())
                 {
                     Cards[card].transform.SetParent(SpellPanel.transform);
                     return;

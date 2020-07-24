@@ -52,6 +52,8 @@ namespace Deathblow
         void Start()
         {
             GameManager.StartNewGame();
+            //ResourceManager.SaveDeck(GameManager.Deck);
+            //ResourceManager.LoadDeck(GameManager.Deck);
             //GameManager.TEST();
         }
     }

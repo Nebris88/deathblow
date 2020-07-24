@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.IO;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -7,6 +8,8 @@ namespace Deathblow
 {
     public class ResourceManager : MonoBehaviour
     {
+        private const string DECK_PATH = "/deck.json";
+
         public Dictionary<string, Sprite> IconSprites { get; set; }
         
         public void Init()
@@ -55,6 +58,22 @@ namespace Deathblow
             }
 
             return IconSprites[charge.ToString()];
+        }
+
+        public void SaveDeck(Deck deck)
+        {
+            DeckData deckData = new DeckData(deck);
+            string deckDataJson = JsonUtility.ToJson(deckData);
+            //Debug.Log(deckDataJson);
+            //Debug.Log(Application.streamingAssetsPath + DECK_PATH);
+            File.WriteAllText(Application.streamingAssetsPath + DECK_PATH, deckDataJson);
+        }
+
+        public Deck LoadDeck()
+        {
+            string deckDataJson = File.ReadAllText(Application.streamingAssetsPath + DECK_PATH);
+            DeckData deckData = JsonUtility.FromJson<DeckData>(deckDataJson);
+            return new Deck(deckData);
         }
     }
 }

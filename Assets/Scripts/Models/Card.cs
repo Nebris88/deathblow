@@ -6,6 +6,8 @@ using UnityEngine;
 
 namespace Deathblow
 {
+    public enum CardType { Item, Equipment, Spell, Other }
+    public enum EquipmentType { Unequppable, Weapon, Headgear, Body, Accessory, Free }
     public enum CardBonus { Die, Attack, Defense, Heal, Power, Mind, Life }  
 
     public class Card
@@ -15,11 +17,10 @@ namespace Deathblow
         public CardOwner CardOwner { get; set; }
         public Deck Deck { get; set; }
         public string Name { get; set; }
+        public CardType CardType { get; set; }
+        public EquipmentType EquipmentType { get; set; }
         public List<CardBonus> Bonuses { get; set; }
         public List<Charge> Costs { get; set; }
-        
-        public bool IsEquipment { get; set; }
-        public bool IsSpell { get; set; }
 
         public bool IsEquipped 
         { 
@@ -58,12 +59,33 @@ namespace Deathblow
         {
             Deck = deck;
             Name = name;
-            IsEquipment = false;
-            IsSpell = false;
             Bonuses = new List<CardBonus>();
             Costs = new List<Charge>();
 
             RandomizeCard();
+            RegisterOnCardEquippedCallback(OnThisEquipped);
+        }
+
+        public Card (Deck deck, CardData cardData)
+        {
+            Bonuses = new List<CardBonus>();
+            Costs = new List<Charge>();
+
+            Deck = deck;
+            Name = cardData.name;
+
+            try
+            {
+                CardType = (CardType)Enum.Parse(typeof(CardType), cardData.cardType);
+                EquipmentType = (EquipmentType)Enum.Parse(typeof(EquipmentType), cardData.equipmentType);
+                foreach (string bonus in cardData.bonuses) Bonuses.Add((CardBonus)Enum.Parse(typeof(CardBonus), bonus));
+                foreach (string cost in cardData.costs) Costs.Add((Charge)Enum.Parse(typeof(Charge), cost));
+            }
+            catch (ArgumentException e)
+            {
+                Debug.LogError(e);
+            }
+
             RegisterOnCardEquippedCallback(OnThisEquipped);
         }
 
@@ -94,7 +116,7 @@ namespace Deathblow
 
         public bool IsEquippable()
         {
-            return IsEquipment || IsSpell;
+            return !(CardType == CardType.Item);
         }
 
         public void OnThisEquipped(Card card)
@@ -119,27 +141,55 @@ namespace Deathblow
             }
         }
 
+        public bool IsEquipment()
+        {
+            return CardType == CardType.Equipment;
+        }
+
+        public bool IsSpell()
+        {
+            return CardType == CardType.Spell;
+        }
+
         public void RandomizeCard()
         {
-            int type = (int)UnityEngine.Random.Range(0, 3);
+            CardType = (CardType)(int)UnityEngine.Random.Range(0, 3);
 
-            if (type == 0)
+            if (CardType == CardType.Equipment)
             {
-                IsEquipment = true;
+                EquipmentType = (EquipmentType)(int)UnityEngine.Random.Range(1, 5);
                 for (int x = 0; x < (int)UnityEngine.Random.Range(1, 4); x++)
                 {
                     Bonuses.Add((CardBonus)(int)UnityEngine.Random.Range(0, 7));
                 }
                 return;
             }
-            if (type == 1)
+            if (CardType == CardType.Spell)
             {
-                IsSpell = true;
                 for (int x = 0; x < (int)UnityEngine.Random.Range(1, 4); x++)
                 {
                     Costs.Add((Charge)(int)UnityEngine.Random.Range(0, 4));
                 }
             }
+        }
+    }
+
+    [Serializable]
+    public class CardData
+    {
+        public string name;
+        public string cardType;
+        public string equipmentType;
+        public string[] bonuses;
+        public string[] costs;
+
+        public CardData(Card card)
+        {
+            name = card.Name;
+            cardType = card.CardType.ToString();
+            equipmentType = card.EquipmentType.ToString();
+            bonuses = card.Bonuses.ConvertAll(bonus => bonus.ToString()).ToArray();
+            costs = card.Costs.ConvertAll(cost => cost.ToString()).ToArray();
         }
     }
 }

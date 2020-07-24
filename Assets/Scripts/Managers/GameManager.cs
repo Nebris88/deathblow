@@ -52,7 +52,7 @@ namespace Deathblow
             this.gameRulesManager = gameRulesManager;
 
             //Load Decks
-            Deck = new Deck();
+            Deck = MasterManager.Instance.ResourceManager.LoadDeck();
             //Deck.PrintDeck();
 
             //Create Players

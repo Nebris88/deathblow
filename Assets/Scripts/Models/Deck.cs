@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -17,6 +18,16 @@ namespace Deathblow
             for (int x = 1; x < 61; x++)
             {
                 Cards.Add(new Card(this, "" + x));
+            }
+            ReturnAndShuffle();
+        }
+
+        public Deck(DeckData deckData)
+        {
+            Cards = new List<Card>();
+            foreach (CardData cardData in deckData.cards)
+            {
+                Cards.Add(new Card(this, cardData));
             }
             ReturnAndShuffle();
         }
@@ -85,7 +96,7 @@ namespace Deathblow
             Card[] deckCards = deck.ToArray();
             for (int i = 0; i < deckCards.Length; i++)
             {
-                int randomIndex = Random.Range(0, deckCards.Length);
+                int randomIndex = UnityEngine.Random.Range(0, deckCards.Length);
                 Card temp = deckCards[randomIndex];
                 deckCards[randomIndex] = deckCards[i];
                 deckCards[i] = temp;
@@ -150,6 +161,18 @@ namespace Deathblow
         public void PrintDeck()
         {
             PrintCards(deck.ToList());
+        }
+    }
+
+
+    [Serializable]
+    public class DeckData
+    {
+        public CardData[] cards;
+        
+        public DeckData(Deck deck)
+        {
+            cards = deck.Cards.ConvertAll(card => new CardData(card)).ToArray();
         }
     }
 }

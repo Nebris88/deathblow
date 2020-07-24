@@ -30,7 +30,7 @@ namespace Deathblow
             SelectButton.interactable = selectable;
             SelectButton.onClick.AddListener(delegate { OnCardSelected(); });
 
-            if (card.IsEquipment)
+            if (card.IsEquipment())
             {   
                 card.Bonuses.ForEach(bonus => {
                     GameObject cardIconObject = GameObject.Instantiate(CardIconPrefab);
@@ -40,7 +40,7 @@ namespace Deathblow
                 });
             }
 
-            if (card.IsSpell)
+            if (card.IsSpell())
             {   
                 card.Costs.ForEach(charge => {
                     GameObject cardIconObject = GameObject.Instantiate(CardIconPrefab);
