@@ -62,15 +62,15 @@ namespace Deathblow
 
         public void SaveDeck(Deck deck)
         {
+            Debug.Log("Deck Saved");
             DeckData deckData = new DeckData(deck);
             string deckDataJson = JsonUtility.ToJson(deckData);
-            //Debug.Log(deckDataJson);
-            //Debug.Log(Application.streamingAssetsPath + DECK_PATH);
             File.WriteAllText(Application.streamingAssetsPath + DECK_PATH, deckDataJson);
         }
 
         public Deck LoadDeck()
         {
+            Debug.Log("Deck Loaded");
             string deckDataJson = File.ReadAllText(Application.streamingAssetsPath + DECK_PATH);
             DeckData deckData = JsonUtility.FromJson<DeckData>(deckDataJson);
             return new Deck(deckData);

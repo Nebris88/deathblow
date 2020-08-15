@@ -12,10 +12,13 @@ namespace Deathblow
         public GameObject ActionPanelContainer;
         public Dropdown ActionPanelDropDown;
 
+        public GameManager GameManager { get; set; }
         public Dictionary<Player, GameObject> PlayerActionPanels { get; set; }
+        public bool initialized = false;
 
         public void Init(GameManager gameManager)
         {
+            GameManager = gameManager;
             List<Player> players = gameManager.Players;
             gameManager.RegisterOnActivePlayerChangedCallback(ToggleActiveActionPanel);
 
@@ -42,6 +45,8 @@ namespace Deathblow
             ActionPanelDropDown.AddOptions(options);
             ActionPanelDropDown.onValueChanged.AddListener(delegate { gameManager.ActivePlayer = PlayerActionPanels.Keys.ToList()[ActionPanelDropDown.value]; });
             gameManager.ActivePlayer = PlayerActionPanels.Keys.ToList()[ActionPanelDropDown.value];
+
+            initialized = true;
         }
 
         public void ToggleActiveActionPanel(Player player)
@@ -49,6 +54,21 @@ namespace Deathblow
             PlayerActionPanels.Values.ToList().ForEach(panel => {
                 panel.SetActive(PlayerActionPanels[player] == panel);
             });
+        }
+
+        void Update()
+        {
+            if (initialized)
+            {
+                if (Input.GetKeyDown(KeyCode.UpArrow))
+                {
+                    ActionPanelDropDown.value = ActionPanelDropDown.value - 1 < 0 ? ActionPanelDropDown.options.Count - 1 : ActionPanelDropDown.value - 1;
+                }
+                else if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.Tab))
+                { 
+                    ActionPanelDropDown.value = ActionPanelDropDown.value + 1 >= ActionPanelDropDown.options.Count ? 0 : ActionPanelDropDown.value + 1;
+                }
+            }
         }
     }
 }

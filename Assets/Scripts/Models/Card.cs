@@ -17,6 +17,7 @@ namespace Deathblow
         public CardOwner CardOwner { get; set; }
         public Deck Deck { get; set; }
         public string Name { get; set; }
+        public string Effect { get; set; }
         public CardType CardType { get; set; }
         public EquipmentType EquipmentType { get; set; }
         public List<CardBonus> Bonuses { get; set; }
@@ -59,6 +60,7 @@ namespace Deathblow
         {
             Deck = deck;
             Name = name;
+            Effect = "";
             Bonuses = new List<CardBonus>();
             Costs = new List<Charge>();
 
@@ -73,6 +75,7 @@ namespace Deathblow
 
             Deck = deck;
             Name = cardData.name;
+            Effect = cardData.effect;
 
             try
             {
@@ -178,6 +181,7 @@ namespace Deathblow
     public class CardData
     {
         public string name;
+        public string effect;
         public string cardType;
         public string equipmentType;
         public string[] bonuses;
@@ -186,6 +190,7 @@ namespace Deathblow
         public CardData(Card card)
         {
             name = card.Name;
+            effect = card.Effect;
             cardType = card.CardType.ToString();
             equipmentType = card.EquipmentType.ToString();
             bonuses = card.Bonuses.ConvertAll(bonus => bonus.ToString()).ToArray();

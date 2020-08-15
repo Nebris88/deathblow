@@ -1,1 +1,549 @@
-{"cards":[{"name":"1","cardType":"Equipment","equipmentType":"Weapon","bonuses":["Power","Power","Defense"],"costs":[]},{"name":"2","cardType":"Spell","equipmentType":"Unequppable","bonuses":[],"costs":["Mind_Energy","Life_Energy"]},{"name":"3","cardType":"Spell","equipmentType":"Unequppable","bonuses":[],"costs":["Life_Energy","Power_Energy"]},{"name":"4","cardType":"Spell","equipmentType":"Unequppable","bonuses":[],"costs":["Power_Energy"]},{"name":"5","cardType":"Item","equipmentType":"Unequppable","bonuses":[],"costs":[]},{"name":"6","cardType":"Equipment","equipmentType":"Accessory","bonuses":["Mind","Defense"],"costs":[]},{"name":"7","cardType":"Equipment","equipmentType":"Accessory","bonuses":["Heal"],"costs":[]},{"name":"8","cardType":"Item","equipmentType":"Unequppable","bonuses":[],"costs":[]},{"name":"9","cardType":"Spell","equipmentType":"Unequppable","bonuses":[],"costs":["Any_Energy","Power_Energy","Life_Energy"]},{"name":"10","cardType":"Item","equipmentType":"Unequppable","bonuses":[],"costs":[]},{"name":"11","cardType":"Equipment","equipmentType":"Headgear","bonuses":["Mind","Life"],"costs":[]},{"name":"12","cardType":"Spell","equipmentType":"Unequppable","bonuses":[],"costs":["Any_Energy","Mind_Energy"]},{"name":"13","cardType":"Spell","equipmentType":"Unequppable","bonuses":[],"costs":["Mind_Energy","Any_Energy"]},{"name":"14","cardType":"Item","equipmentType":"Unequppable","bonuses":[],"costs":[]},{"name":"15","cardType":"Equipment","equipmentType":"Accessory","bonuses":["Life","Power"],"costs":[]},{"name":"16","cardType":"Equipment","equipmentType":"Accessory","bonuses":["Attack","Attack"],"costs":[]},{"name":"17","cardType":"Equipment","equipmentType":"Accessory","bonuses":["Mind"],"costs":[]},{"name":"18","cardType":"Equipment","equipmentType":"Accessory","bonuses":["Heal","Mind"],"costs":[]},{"name":"19","cardType":"Spell","equipmentType":"Unequppable","bonuses":[],"costs":["Power_Energy","Mind_Energy"]},{"name":"20","cardType":"Spell","equipmentType":"Unequppable","bonuses":[],"costs":["Mind_Energy","Life_Energy"]},{"name":"21","cardType":"Item","equipmentType":"Unequppable","bonuses":[],"costs":[]},{"name":"22","cardType":"Item","equipmentType":"Unequppable","bonuses":[],"costs":[]},{"name":"23","cardType":"Equipment","equipmentType":"Accessory","bonuses":["Defense","Mind","Mind"],"costs":[]},{"name":"24","cardType":"Spell","equipmentType":"Unequppable","bonuses":[],"costs":["Power_Energy","Life_Energy"]},{"name":"25","cardType":"Equipment","equipmentType":"Body","bonuses":["Die"],"costs":[]},{"name":"26","cardType":"Item","equipmentType":"Unequppable","bonuses":[],"costs":[]},{"name":"27","cardType":"Equipment","equipmentType":"Accessory","bonuses":["Attack","Mind"],"costs":[]},{"name":"28","cardType":"Spell","equipmentType":"Unequppable","bonuses":[],"costs":["Any_Energy","Mind_Energy","Any_Energy"]},{"name":"29","cardType":"Equipment","equipmentType":"Body","bonuses":["Attack","Defense","Die"],"costs":[]},{"name":"30","cardType":"Equipment","equipmentType":"Accessory","bonuses":["Defense"],"costs":[]},{"name":"31","cardType":"Spell","equipmentType":"Unequppable","bonuses":[],"costs":["Mind_Energy","Life_Energy","Any_Energy"]},{"name":"32","cardType":"Equipment","equipmentType":"Accessory","bonuses":["Power","Heal"],"costs":[]},{"name":"33","cardType":"Spell","equipmentType":"Unequppable","bonuses":[],"costs":["Life_Energy","Mind_Energy"]},{"name":"34","cardType":"Spell","equipmentType":"Unequppable","bonuses":[],"costs":["Any_Energy","Any_Energy"]},{"name":"35","cardType":"Item","equipmentType":"Unequppable","bonuses":[],"costs":[]},{"name":"36","cardType":"Spell","equipmentType":"Unequppable","bonuses":[],"costs":["Mind_Energy"]},{"name":"37","cardType":"Item","equipmentType":"Unequppable","bonuses":[],"costs":[]},{"name":"38","cardType":"Equipment","equipmentType":"Body","bonuses":["Attack","Die"],"costs":[]},{"name":"39","cardType":"Equipment","equipmentType":"Weapon","bonuses":["Die","Life"],"costs":[]},{"name":"40","cardType":"Spell","equipmentType":"Unequppable","bonuses":[],"costs":["Mind_Energy","Any_Energy"]},{"name":"41","cardType":"Spell","equipmentType":"Unequppable","bonuses":[],"costs":["Power_Energy","Power_Energy"]},{"name":"42","cardType":"Spell","equipmentType":"Unequppable","bonuses":[],"costs":["Power_Energy","Any_Energy"]},{"name":"43","cardType":"Item","equipmentType":"Unequppable","bonuses":[],"costs":[]},{"name":"44","cardType":"Item","equipmentType":"Unequppable","bonuses":[],"costs":[]},{"name":"45","cardType":"Equipment","equipmentType":"Weapon","bonuses":["Die"],"costs":[]},{"name":"46","cardType":"Item","equipmentType":"Unequppable","bonuses":[],"costs":[]},{"name":"47","cardType":"Equipment","equipmentType":"Body","bonuses":["Defense","Mind","Mind"],"costs":[]},{"name":"48","cardType":"Item","equipmentType":"Unequppable","bonuses":[],"costs":[]},{"name":"49","cardType":"Spell","equipmentType":"Unequppable","bonuses":[],"costs":["Any_Energy","Any_Energy"]},{"name":"50","cardType":"Spell","equipmentType":"Unequppable","bonuses":[],"costs":["Mind_Energy"]},{"name":"51","cardType":"Item","equipmentType":"Unequppable","bonuses":[],"costs":[]},{"name":"52","cardType":"Item","equipmentType":"Unequppable","bonuses":[],"costs":[]},{"name":"53","cardType":"Equipment","equipmentType":"Weapon","bonuses":["Power"],"costs":[]},{"name":"54","cardType":"Item","equipmentType":"Unequppable","bonuses":[],"costs":[]},{"name":"55","cardType":"Item","equipmentType":"Unequppable","bonuses":[],"costs":[]},{"name":"56","cardType":"Item","equipmentType":"Unequppable","bonuses":[],"costs":[]},{"name":"57","cardType":"Spell","equipmentType":"Unequppable","bonuses":[],"costs":["Life_Energy"]},{"name":"58","cardType":"Equipment","equipmentType":"Weapon","bonuses":["Mind","Defense","Mind"],"costs":[]},{"name":"59","cardType":"Spell","equipmentType":"Unequppable","bonuses":[],"costs":["Power_Energy","Power_Energy","Mind_Energy"]},{"name":"60","cardType":"Spell","equipmentType":"Unequppable","bonuses":[],"costs":["Life_Energy","Mind_Energy"]}]}
+{
+	"cards": [
+		{
+			"name": "1",
+			"cardType": "Equipment",
+			"equipmentType": "Weapon",
+			"bonuses": [
+				"Power",
+				"Power",
+				"Defense"
+			],
+			"costs": []
+		},
+		{
+			"name": "2",
+			"cardType": "Spell",
+			"equipmentType": "Unequppable",
+			"bonuses": [],
+			"costs": [
+				"Mind_Energy",
+				"Life_Energy"
+			]
+		},
+		{
+			"name": "3",
+			"cardType": "Spell",
+			"equipmentType": "Unequppable",
+			"bonuses": [],
+			"costs": [
+				"Life_Energy",
+				"Power_Energy"
+			]
+		},
+		{
+			"name": "4",
+			"cardType": "Spell",
+			"equipmentType": "Unequppable",
+			"bonuses": [],
+			"costs": [
+				"Power_Energy"
+			]
+		},
+		{
+			"name": "5",
+			"cardType": "Item",
+			"equipmentType": "Unequppable",
+			"bonuses": [],
+			"costs": []
+		},
+		{
+			"name": "6",
+			"cardType": "Equipment",
+			"equipmentType": "Accessory",
+			"bonuses": [
+				"Mind",
+				"Defense"
+			],
+			"costs": []
+		},
+		{
+			"name": "7",
+			"cardType": "Equipment",
+			"equipmentType": "Accessory",
+			"bonuses": [
+				"Heal"
+			],
+			"costs": []
+		},
+		{
+			"name": "8",
+			"cardType": "Item",
+			"equipmentType": "Unequppable",
+			"bonuses": [],
+			"costs": []
+		},
+		{
+			"name": "9",
+			"cardType": "Spell",
+			"equipmentType": "Unequppable",
+			"bonuses": [],
+			"costs": [
+				"Any_Energy",
+				"Power_Energy",
+				"Life_Energy"
+			]
+		},
+		{
+			"name": "10",
+			"cardType": "Item",
+			"equipmentType": "Unequppable",
+			"bonuses": [],
+			"costs": []
+		},
+		{
+			"name": "11",
+			"cardType": "Equipment",
+			"equipmentType": "Headgear",
+			"bonuses": [
+				"Mind",
+				"Life"
+			],
+			"costs": []
+		},
+		{
+			"name": "12",
+			"cardType": "Spell",
+			"equipmentType": "Unequppable",
+			"bonuses": [],
+			"costs": [
+				"Any_Energy",
+				"Mind_Energy"
+			]
+		},
+		{
+			"name": "13",
+			"cardType": "Spell",
+			"equipmentType": "Unequppable",
+			"bonuses": [],
+			"costs": [
+				"Mind_Energy",
+				"Any_Energy"
+			]
+		},
+		{
+			"name": "14",
+			"cardType": "Item",
+			"equipmentType": "Unequppable",
+			"bonuses": [],
+			"costs": []
+		},
+		{
+			"name": "15",
+			"cardType": "Equipment",
+			"equipmentType": "Accessory",
+			"bonuses": [
+				"Life",
+				"Power"
+			],
+			"costs": []
+		},
+		{
+			"name": "16",
+			"cardType": "Equipment",
+			"equipmentType": "Accessory",
+			"bonuses": [
+				"Attack",
+				"Attack"
+			],
+			"costs": []
+		},
+		{
+			"name": "17",
+			"cardType": "Equipment",
+			"equipmentType": "Accessory",
+			"bonuses": [
+				"Mind"
+			],
+			"costs": []
+		},
+		{
+			"name": "18",
+			"cardType": "Equipment",
+			"equipmentType": "Accessory",
+			"bonuses": [
+				"Heal",
+				"Mind"
+			],
+			"costs": []
+		},
+		{
+			"name": "19",
+			"cardType": "Spell",
+			"equipmentType": "Unequppable",
+			"bonuses": [],
+			"costs": [
+				"Power_Energy",
+				"Mind_Energy"
+			]
+		},
+		{
+			"name": "20",
+			"cardType": "Spell",
+			"equipmentType": "Unequppable",
+			"bonuses": [],
+			"costs": [
+				"Mind_Energy",
+				"Life_Energy"
+			]
+		},
+		{
+			"name": "21",
+			"cardType": "Item",
+			"equipmentType": "Unequppable",
+			"bonuses": [],
+			"costs": []
+		},
+		{
+			"name": "22",
+			"cardType": "Item",
+			"equipmentType": "Unequppable",
+			"bonuses": [],
+			"costs": []
+		},
+		{
+			"name": "23",
+			"cardType": "Equipment",
+			"equipmentType": "Accessory",
+			"bonuses": [
+				"Defense",
+				"Mind",
+				"Mind"
+			],
+			"costs": []
+		},
+		{
+			"name": "24",
+			"cardType": "Spell",
+			"equipmentType": "Unequppable",
+			"bonuses": [],
+			"costs": [
+				"Power_Energy",
+				"Life_Energy"
+			]
+		},
+		{
+			"name": "25",
+			"cardType": "Equipment",
+			"equipmentType": "Body",
+			"bonuses": [
+				"Die"
+			],
+			"costs": []
+		},
+		{
+			"name": "26",
+			"cardType": "Item",
+			"equipmentType": "Unequppable",
+			"bonuses": [],
+			"costs": []
+		},
+		{
+			"name": "27",
+			"cardType": "Equipment",
+			"equipmentType": "Accessory",
+			"bonuses": [
+				"Attack",
+				"Mind"
+			],
+			"costs": []
+		},
+		{
+			"name": "28",
+			"cardType": "Spell",
+			"equipmentType": "Unequppable",
+			"bonuses": [],
+			"costs": [
+				"Any_Energy",
+				"Mind_Energy",
+				"Any_Energy"
+			]
+		},
+		{
+			"name": "29",
+			"cardType": "Equipment",
+			"equipmentType": "Body",
+			"bonuses": [
+				"Attack",
+				"Defense",
+				"Die"
+			],
+			"costs": []
+		},
+		{
+			"name": "30",
+			"cardType": "Equipment",
+			"equipmentType": "Accessory",
+			"bonuses": [
+				"Defense"
+			],
+			"costs": []
+		},
+		{
+			"name": "31",
+			"cardType": "Spell",
+			"equipmentType": "Unequppable",
+			"bonuses": [],
+			"costs": [
+				"Mind_Energy",
+				"Life_Energy",
+				"Any_Energy"
+			]
+		},
+		{
+			"name": "32",
+			"cardType": "Equipment",
+			"equipmentType": "Accessory",
+			"bonuses": [
+				"Power",
+				"Heal"
+			],
+			"costs": []
+		},
+		{
+			"name": "33",
+			"cardType": "Spell",
+			"equipmentType": "Unequppable",
+			"bonuses": [],
+			"costs": [
+				"Life_Energy",
+				"Mind_Energy"
+			]
+		},
+		{
+			"name": "34",
+			"cardType": "Spell",
+			"equipmentType": "Unequppable",
+			"bonuses": [],
+			"costs": [
+				"Any_Energy",
+				"Any_Energy"
+			]
+		},
+		{
+			"name": "35",
+			"cardType": "Item",
+			"equipmentType": "Unequppable",
+			"bonuses": [],
+			"costs": []
+		},
+		{
+			"name": "36",
+			"cardType": "Spell",
+			"equipmentType": "Unequppable",
+			"bonuses": [],
+			"costs": [
+				"Mind_Energy"
+			]
+		},
+		{
+			"name": "37",
+			"cardType": "Item",
+			"equipmentType": "Unequppable",
+			"bonuses": [],
+			"costs": []
+		},
+		{
+			"name": "38",
+			"cardType": "Equipment",
+			"equipmentType": "Body",
+			"bonuses": [
+				"Attack",
+				"Die"
+			],
+			"costs": []
+		},
+		{
+			"name": "39",
+			"cardType": "Equipment",
+			"equipmentType": "Weapon",
+			"bonuses": [
+				"Die",
+				"Life"
+			],
+			"costs": []
+		},
+		{
+			"name": "40",
+			"cardType": "Spell",
+			"equipmentType": "Unequppable",
+			"bonuses": [],
+			"costs": [
+				"Mind_Energy",
+				"Any_Energy"
+			]
+		},
+		{
+			"name": "41",
+			"cardType": "Spell",
+			"equipmentType": "Unequppable",
+			"bonuses": [],
+			"costs": [
+				"Power_Energy",
+				"Power_Energy"
+			]
+		},
+		{
+			"name": "42",
+			"cardType": "Spell",
+			"equipmentType": "Unequppable",
+			"bonuses": [],
+			"costs": [
+				"Power_Energy",
+				"Any_Energy"
+			]
+		},
+		{
+			"name": "43",
+			"cardType": "Item",
+			"equipmentType": "Unequppable",
+			"bonuses": [],
+			"costs": []
+		},
+		{
+			"name": "44",
+			"cardType": "Item",
+			"equipmentType": "Unequppable",
+			"bonuses": [],
+			"costs": []
+		},
+		{
+			"name": "45",
+			"cardType": "Equipment",
+			"equipmentType": "Weapon",
+			"bonuses": [
+				"Die"
+			],
+			"costs": []
+		},
+		{
+			"name": "46",
+			"cardType": "Item",
+			"equipmentType": "Unequppable",
+			"bonuses": [],
+			"costs": []
+		},
+		{
+			"name": "47",
+			"cardType": "Equipment",
+			"equipmentType": "Body",
+			"bonuses": [
+				"Defense",
+				"Mind",
+				"Mind"
+			],
+			"costs": []
+		},
+		{
+			"name": "48",
+			"cardType": "Item",
+			"equipmentType": "Unequppable",
+			"bonuses": [],
+			"costs": []
+		},
+		{
+			"name": "49",
+			"cardType": "Spell",
+			"equipmentType": "Unequppable",
+			"bonuses": [],
+			"costs": [
+				"Any_Energy",
+				"Any_Energy"
+			]
+		},
+		{
+			"name": "50",
+			"cardType": "Spell",
+			"equipmentType": "Unequppable",
+			"bonuses": [],
+			"costs": [
+				"Mind_Energy"
+			]
+		},
+		{
+			"name": "51",
+			"cardType": "Item",
+			"equipmentType": "Unequppable",
+			"bonuses": [],
+			"costs": []
+		},
+		{
+			"name": "52",
+			"cardType": "Item",
+			"equipmentType": "Unequppable",
+			"bonuses": [],
+			"costs": []
+		},
+		{
+			"name": "53",
+			"cardType": "Equipment",
+			"equipmentType": "Weapon",
+			"bonuses": [
+				"Power"
+			],
+			"costs": []
+		},
+		{
+			"name": "54",
+			"cardType": "Item",
+			"equipmentType": "Unequppable",
+			"bonuses": [],
+			"costs": []
+		},
+		{
+			"name": "55",
+			"cardType": "Item",
+			"equipmentType": "Unequppable",
+			"bonuses": [],
+			"costs": []
+		},
+		{
+			"name": "56",
+			"cardType": "Item",
+			"equipmentType": "Unequppable",
+			"bonuses": [],
+			"costs": []
+		},
+		{
+			"name": "57",
+			"cardType": "Spell",
+			"equipmentType": "Unequppable",
+			"bonuses": [],
+			"costs": [
+				"Life_Energy"
+			]
+		},
+		{
+			"name": "58",
+			"cardType": "Equipment",
+			"equipmentType": "Weapon",
+			"bonuses": [
+				"Mind",
+				"Defense",
+				"Mind"
+			],
+			"costs": []
+		},
+		{
+			"name": "59",
+			"cardType": "Spell",
+			"equipmentType": "Unequppable",
+			"bonuses": [],
+			"costs": [
+				"Power_Energy",
+				"Power_Energy",
+				"Mind_Energy"
+			]
+		},
+		{
+			"name": "60",
+			"cardType": "Spell",
+			"equipmentType": "Unequppable",
+			"bonuses": [],
+			"costs": [
+				"Life_Energy",
+				"Mind_Energy"
+			]
+		}
+	]
+}
