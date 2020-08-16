@@ -24,19 +24,40 @@ namespace Deathblow
 
         public void OnDeckLoaded(Deck deck)
         {
-            Debug.Log("OnDeckLoaded");
-            ScrollViewContent.GetComponent<RectTransform>().sizeDelta = new Vector2(0, deck.Cards.Count * 30);
+            new List<Card>(CardEdits.Keys).ForEach(card => {
+                DeleteCard(card);
+            });
 
             deck.Cards.ForEach(card => {
-
-                GameObject cardEditObject = GameObject.Instantiate(CardEditPrefab);
-                cardEditObject.transform.SetParent(ScrollViewContent.transform);
-                cardEditObject.name = card.Name;
-
-                //cardEditObject.GetComponent<CardEditController>().Init(card);
-
-                CardEdits.Add(card, cardEditObject);
+                AddCard(card);
             });
+
+            deck.RegisterOnCardAddedCallback(AddCard);
+            deck.RegisterOnCardRemovedCallback(DeleteCard);
+        }
+
+        public void AddCard(Card card)
+        {
+            GameObject cardEditObject = GameObject.Instantiate(CardEditPrefab);
+            cardEditObject.transform.SetParent(ScrollViewContent.transform);
+            cardEditObject.name = card.Name;
+
+            cardEditObject.GetComponent<CardEditController>().Init(card);
+
+            CardEdits.Add(card, cardEditObject);
+        }
+
+        public void DeleteCard(Card card)
+        {
+            if (!CardEdits.ContainsKey(card))
+            {
+                Debug.LogError("Trying to delete card that shouldn't exist!");
+                return;
+            }
+
+            GameObject cardObject = CardEdits[card];
+            CardEdits.Remove(card);
+            GameObject.Destroy(cardObject);
         }
     }
 }

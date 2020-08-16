@@ -175,6 +175,12 @@ namespace Deathblow
                 }
             }
         }
+
+        public void SortStats()
+        {
+            Bonuses = Bonuses.OrderBy(b => b).ToList();
+            Costs = Costs.OrderBy(c => c).ToList();
+        }
     }
 
     [Serializable]

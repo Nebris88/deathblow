@@ -12,6 +12,9 @@ namespace Deathblow
         private Stack<Card> deck = new Stack<Card>();
         private Stack<Card> discard = new Stack<Card>();
 
+        Action<Card> OnCardAddedCallback;
+        Action<Card> OnCardRemovedCallback;
+
         public Deck()
         {
             Cards = new List<Card>();
@@ -161,6 +164,60 @@ namespace Deathblow
         public void PrintDeck()
         {
             PrintCards(deck.ToList());
+        }
+
+        public void AddCard()
+        {
+            Card newCard = new Card(this, "New Card");
+            Cards.Add(newCard);
+
+            if (OnCardAddedCallback != null)
+            {
+                OnCardAddedCallback(newCard);
+            }
+        }
+
+        public void RemoveCard(Card card)
+        {
+            if (!Cards.Contains(card))
+            {
+                Debug.LogError("Trying to remove card from deck that isn't in deck");
+                return;
+            }
+
+            Cards.Remove(card);
+
+            if (OnCardRemovedCallback != null)
+            {
+                OnCardRemovedCallback(card);
+            }
+        }
+
+        public void SortDeck()
+        {
+            Debug.Log("Sorting deck.");
+            Cards.ForEach(card => { card.SortStats(); });
+            Cards = Cards.OrderBy(card => card.CardType).ThenBy(card => card.EquipmentType).ToList();
+        }
+
+        public void RegisterOnCardAddedCallback(Action<Card> callback)
+        {
+            OnCardAddedCallback += callback;
+        }
+
+        public void UnregisterOnCardAddedCallback(Action<Card> callback)
+        {
+            OnCardAddedCallback -= callback;
+        }
+
+        public void RegisterOnCardRemovedCallback(Action<Card> callback)
+        {
+            OnCardRemovedCallback += callback;
+        }
+
+        public void UnregisterOnCardRemovedCallback(Action<Card> callback)
+        {
+            OnCardRemovedCallback -= callback;
         }
     }
 
